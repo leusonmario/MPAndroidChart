@@ -6,3 +6,9 @@ jdk:
 
 script:
   - ./gradlew assemble testClasses
+
+before_deploy:
+    - mkdir MiningBuild
+    - find . -name '*.jar' -exec cp {} ./MiningBuild \\;
+    - cd /home/travis/build/${owner}/${trimmedProjectName}/MiningBuild
+    - tar -zcvf result.tar.gz *
